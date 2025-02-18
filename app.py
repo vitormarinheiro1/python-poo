@@ -3,6 +3,8 @@
 
 import os
 
+restaurantes = ['Madero', 'Outback']
+
 def exibir_nome_projeto():
     print('''
     ░██████╗░█████╗░██████╗░░█████╗░██████╗░  ███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗
@@ -14,13 +16,34 @@ def exibir_nome_projeto():
     ''')
 
 def finalizar_app():
+    exibir_subtitulo('Finalizando sistema...\n')
+
+def exibir_subtitulo(texto):
     os.system('cls')
-    print('finalizando sistema...')
+    print(texto)
+
+def voltar_ao_menu_principal():
+    input('Digite uma tecla para voltar ao menu principal.\n')
+    main()
+
+def cadastrar_restaurantes():
+    exibir_subtitulo('Cadastro de novos restaurantes')
+    nome_do_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
+    restaurantes.append(nome_do_restaurante)
+    print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!')
+    voltar_ao_menu_principal()
+
+def listar_restaurantes():
+    exibir_subtitulo('Listar restaurantes')
+
+    for restaurante in restaurantes:
+        print(f'.{restaurante}')
+
+    voltar_ao_menu_principal()
 
 def opcao_invalida():
     print('Opção inválida!\n')
-    input('Digite uma tecla para voltar ao menu principal')
-    main()
+    voltar_ao_menu_principal()
 
 def exibir_opcoes():
     print('1. Cadastrar restaurante')
@@ -33,13 +56,13 @@ def escolher_opcao():
         opcao_escolhida = int(input('Escolha a opção: '))
         match opcao_escolhida:
             case 1:
-                print('Adicionar restaurante')
+                cadastrar_restaurantes()
             case 2:
-                print('Listar restaurantes')
+                listar_restaurantes()
             case 3:
                 print('Ativar restaurante')
             case 4:
-                print('Finalizar app')
+                finalizar_app()
             case _:
                 opcao_invalida()
     except:
